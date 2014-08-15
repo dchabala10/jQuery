@@ -3,15 +3,15 @@ $(document).ready(function(){
 	//When the mouseovers over a block, change the background coller of the
 	//block to whatever color you want
 
-	$(document).on('.mouseover', '.block', function(){
+	$(document).on('mouseover', '.block', function(){
   		$(this).css('background-color','blue');
 	
-	}).on('.mouseout','.block', function(){
+	}).on('mouseout','.block', function(){
 		$(this).css('background-color', 'white');
 
 	});
 
-	$(document).on('.click', '.block', function(){
+	$(document).on('click', '.block', function(){
 		$(this).remove();
 		
 	});
