@@ -1,3 +1,8 @@
+var interval;
+var speed;
+var counter = 0;
+var levelInterval;
+
 $(document).ready(function(){
 
 	//When the mouseovers over a block, change the background coller of the
@@ -17,10 +22,52 @@ $(document).ready(function(){
 	});
 
 	//Add a block every x seconds
-	var counter = 0;
-	var frequency = 2000;
+	
+	
+	
+	$('.go-button').click(function(event){
+		
+		if ($(this).text() == 'GO!'){
+			var level = $('.level').val();
 
-	setInterval(function(){
+			if (level == "EXTREME"){
+				speed -= speed * .10;
+
+			} else if (level == "Lame Sauce"{
+
+			} else if (level == "Baby"){
+
+			}
+
+
+			setTimer(speed, 'start');
+			$(this).text('PAUSE!');
+			$('.starting-speed').prop("disabled", true);
+		} else {
+			setTimer(speed, 'pause');
+			$(this).text('GO!');
+			$('.starting-speed').prop("disabled", false);
+		}
+
+	});
+
+	$('.restart-button').click(function(event){
+		location.reload();
+
+	});
+
+
+});
+
+function setTimer(speed, type){
+
+
+	speed = ($('.starting-speed').val() * 1000);
+
+
+	if (type == 'start'){
+
+		interval = setInterval(function(){
 		if(counter == 0){
 			$('body').append('<div class="row"><div class="block">New Block</div></div>');
 			counter++;
@@ -29,13 +76,34 @@ $(document).ready(function(){
 			$('.row').last().append('<div class="block">New Block</div>');
 			counter++;
 		
-		} else {
-			$('.row').last().append('<div class="block">New Block</div>');
-			counter = 0;
+			} else {
+				$('.row').last().append('<div class="block">New Block</div>');
+				counter = 0;
+					
+				}		
+
+			}, speed);
+
+		} else if (type == 'pause'){
+			clearInterval(interval);
+		}
+
+   	
+   	}
+
+function setFrequency(frequency, speed, type, level){
+
+
+	levelInterval = setInterval(function(){
+		if (type == 'start'){
+
+			setTimer(speed, 'pause');
+			setTimer(speed, 'start');
+
+		} else{
+			clearInterval(levelInterval);
 		}
 
 	}, frequency);
 
-
-});
-
+}
